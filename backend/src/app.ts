@@ -26,6 +26,6 @@ app.get("/api/get-answer", (req, res) => {
   res.status(200).json({ result: state });
 });
 
-app.listen(port, () => {
-  return console.log(`Express is listening at http://172.14.3.27:${port}`);
+app.listen(port, "0.0.0.0", () => {
+  return console.log(`Express is listening at http://0.0.0.0:${port}`);
 });
