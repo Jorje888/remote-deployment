@@ -27,5 +27,5 @@ app.get("/api/get-answer", (req, res) => {
 });
 
 app.listen(port, () => {
-  return console.log(`Express is listening at http://0.0.0.0:${port}`);
+  return console.log(`Express is listening at http://localhost:${port}`);
 });
