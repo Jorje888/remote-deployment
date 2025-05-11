@@ -1,6 +1,8 @@
 import express from "express";
+import cors from "cors";
 const app = express();
 const port = 3001;
+app.use(cors());
 
 let state: string = "Hi, I'm Echo. Say something so I can say it right back!";
 
