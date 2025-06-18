@@ -1,0 +1,26 @@
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+
+
+COPY package*.json ./
+RUN npm install
+
+
+COPY . . 
+RUN npm run build
+
+
+FROM nginx:1.27.5-alpine AS production
+
+WORKDIR /app
+
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+
+EXPOSE 80
+
+# Use the nginx daemon
+CMD ["nginx", "-g", "daemon off;"]
+
