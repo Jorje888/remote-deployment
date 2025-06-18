@@ -4,13 +4,10 @@ function Answer() {
   const [count, setCount] = useState(0);
   const [data, setData] = useState("");
   async function getData() {
-    const url = "http://63.178.22.145:3001/api/get-answer";
+    const url = "http://localhost:3001/api/get-answer";
     try {
       const response = await fetch(url, {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
       if (!response.ok) {
         console.error("Error fetching data:", response);
