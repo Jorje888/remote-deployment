@@ -1,36 +1,42 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  backend:
-    build: ./backend 
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
     ports:
-      - "3001:3001" 
+      - 8080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    depends_on:
+      - backend
+      - frontend
+
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
 
   frontend:
-    build: ./frontend 
+    build: ./frontend
     ports:
-      - "80:80"   
+      - "80:80"
     depends_on:
-      - backend 
-                                                
-  prometheus:                              
-     build: ./monitoring/prometheus          
-     ports:                                                                                                                           
-       - "9090:9090"
-     depends_on:
-       - backend
-       - frontend
-                                            
+      - backend
 
+  prometheus:
+    build: ./monitoring/prometheus
+    ports:
+      - "9090:9090"
+    depends_on:
+      - cadvisor
 
-
-
-
-
-
-
-
-
-
-
-
+  grafana:
+    build: ./monitoring/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus

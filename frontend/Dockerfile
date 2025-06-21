@@ -9,7 +9,6 @@ RUN npm install
 
 COPY . . 
 RUN npm run build
-RUN npm run buildExporter
 
 
 FROM nginx:1.27.5-alpine AS production
@@ -22,7 +21,6 @@ COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-# Use the nginx daemon
 CMD ["nginx", "-g", "daemon off;"]
 
 
