@@ -3,19 +3,29 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "metrics/index.js",
+  "targets": {
+    "main": {
+      "includeNodeModules": true
+    }
+  },
   "scripts": {
-    "dev": "vite --port 5174 --host 0.0.0.0",
+    "dev": "concurrently \"vite --port 5174 --host 0.0.0.0\" \"node exporter/metrics.js\"",
     "build": "tsc -b && vite build",
+    "buildMetrics": "npx tsc -m commonjs --outFile monitoring/metrics.js exporter/metrics.ts && cp -r node_modules monitoring/",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "express": "^5.1.0",
+    "prom-client": "^15.1.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@types/express": "^5.0.3",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",

@@ -6,10 +6,31 @@ services:
     ports:
       - "3001:3001" 
 
-
   frontend:
     build: ./frontend 
     ports:
       - "80:80"   
     depends_on:
       - backend 
+                                                
+  prometheus:                              
+     build: ./monitoring/prometheus          
+     ports:                                                                                                                           
+       - "9090:9090"
+     depends_on:
+       - backend
+       - frontend
+                                            
+
+
+
+
+
+
+
+
+
+
+
+
+
