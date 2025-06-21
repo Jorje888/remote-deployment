@@ -1,0 +1,61 @@
+groups:
+  - name: alert.rules
+    rules:
+      - alert: BackendContainerDown
+        annotations:
+          description: "Backend container is not exporting metrics, indicating it might be down or unreachable."
+          summary: "Backend container is not running or accessible."
+        expr: |
+          absent_over_time(container_cpu_usage_seconds_total{container_label_com_docker_compose_service="backend", cpu="cpu00"}[5m])
+        for: 30s
+        labels:
+          severity: Critical
+
+      - alert: FrontendContainerDown
+        annotations:
+          description: "Frontend container is not exporting metrics, indicating it might be down or unreachable."
+          summary: "Frontend container is not running or accessible."
+        expr: |
+          absent_over_time(container_cpu_usage_seconds_total{container_label_com_docker_compose_service="frontend", cpu="cpu00"}[5m])
+        for: 30s
+        labels:
+          severity: Critical
+
+      - alert: PrometheusContainerDown
+        annotations:
+          description: "Prometheus container is not exporting metrics, indicating it might be down or unreachable."
+          summary: "Prometheus container is not running or accessible."
+        expr: |
+          absent_over_time(container_cpu_usage_seconds_total{container_label_com_docker_compose_service="prometheus", cpu="cpu00"}[5m])
+        for: 30s
+        labels:
+          severity: Critical
+      - alert: GrafanaContainerDown
+        annotations:
+          description: "Grafana container is not exporting metrics, indicating it might be down or unreachable."
+          summary: "Grafana container is not running or accessible."
+        expr: |
+          absent_over_time(container_cpu_usage_seconds_total{container_label_com_docker_compose_service="grafana", cpu="cpu00"}[5m])
+        for: 30s
+        labels:
+          severity: Critical
+
+      - alert: AlertmanagerContainerDown
+        annotations:
+          description: "Alertmanager container is not exporting metrics, indicating it might be down or unreachable."
+          summary: "Alertmanager container is not running or accessible."
+        expr: |
+          absent_over_time(container_cpu_usage_seconds_total{container_label_com_docker_compose_service="alertmanager", cpu="cpu00"}[5m])
+        for: 30s
+        labels:
+          severity: Critical
+
+      - alert: cAdvisorContainerDown
+        annotations:
+          description: "cAdvisor container is not exporting metrics, indicating it might be down or unreachable."
+          summary: "cAdvisor container is not running or accessible."
+        expr: |
+          absent_over_time(container_cpu_usage_seconds_total{container_label_com_docker_compose_service="cadvisor", cpu="cpu00"}[5m])
+        for: 30s
+        labels:
+          severity: Critical
