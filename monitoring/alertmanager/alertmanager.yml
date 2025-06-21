@@ -1,3 +1,5 @@
+global:
+
 route:
   group_by: ["severity"]
   group_wait: 30s
@@ -8,4 +10,4 @@ route:
 receivers:
   - name: "discord"
     discord_configs:
-      - webhook_url: "https://discordapp.com/api/webhooks/1349006595325038682/PKZMtHoIbzQZGpB5_scwpD3MDjqTCkbcWiBHjNE998qW351t1cogxk-rOyoIByO9dyiQ"
+      - webhook_url: "https://discord.com/api/webhooks/1385995105558855873/qcJmXM03RYOQox1epGgCI33sF2wlNFnj-mOYH_ba1A_WtEont7TiXg5QfQosuarnMWdV"
