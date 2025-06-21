@@ -1,4 +1,4 @@
-FROM alpine:latest as userBuilder
+FROM alpine:3.22.0 as userBuilder
 
 ARG GROUP_ID
 ARG GROUP_NAME
@@ -25,6 +25,7 @@ FROM node:22-alpine AS production
 
 COPY --from=userBuilder /etc/passwd /etc/passwd
 COPY --from=userBuilder /etc/group /etc/group
+
 
 WORKDIR /app
 

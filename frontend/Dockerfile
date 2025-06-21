@@ -1,4 +1,4 @@
-FROM alpine:latest as userBuilder
+FROM alpine:3.22.0 as userBuilder
 
 ARG GROUP_ID
 ARG GROUP_NAME
@@ -21,7 +21,7 @@ COPY . .
 RUN npm run build
 
 
-FROM nginx:1.27.5-alpine AS production
+FROM nginx:1.27.5-alpine-slim AS production
 
 WORKDIR /app
 
